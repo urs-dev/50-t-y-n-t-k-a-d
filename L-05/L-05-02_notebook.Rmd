@@ -1,0 +1,80 @@
+---
+title: "R Notebook"
+author: Urs Klahr
+output:
+  html_document:
+    df_print: paged
+---
+
+# Demo-Report: Rolling Stones on Spotify
+
+This is a report about ...
+... and some more interesting stuff here 
+... and also here.
+
+```{r load_libraries, include=FALSE}
+library(dplyr)
+library(readr)
+ 
+rs = read_csv("rolling_stones.csv",
+              col_types = cols(release_year = col_integer()))
+```
+
+```{r}
+# get the most popular song title
+most_popular_song = rs %>% 
+  filter(song_popularity > 0) %>%
+  arrange(desc(song_popularity))  %>% 
+  head(1) %>%
+  select(song_name, song_popularity)  %>% 
+  pull(song_name)
+```
+
+## most popular song
+The most popular song of the Rolling Stones is **"`r most_popular_song`"**.
+
+## list of most popular songs
+```{r message=FALSE, warning=FALSE}
+rs %>% 
+  filter(song_popularity > 0) %>%
+  arrange(desc(song_popularity))  %>% 
+  head(4) %>%
+  select(song_name, song_popularity)
+```
+
+## list of least popular songs
+```{r message=FALSE, warning=FALSE}
+rs %>% 
+  filter(song_popularity > 0) %>%
+  arrange(desc(song_popularity))  %>% 
+  tail(4) %>%
+  select(song_name, song_popularity)
+```
+
+## Popularity: live vs studio
+```{r message=FALSE, warning=FALSE}
+rs %>%
+  filter(song_popularity > 0) %>%
+  group_by(recording = live) %>%
+  summarise(popularity = mean(song_popularity))
+```
+
+
+
+# Header-1
+## Header-2
+### Header-3
+#### Header-4
+##### Header-5
+###### Header-6
+
+I also generate a plot showing the expenses over the last four
+months and show it below.
+
+```{r plot-cars, echo=FALSE}
+library(ggplot2)
+plot(cars)
+```
+
+<image-created-here>
+
