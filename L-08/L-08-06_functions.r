@@ -16,8 +16,8 @@ cat("\014")
 
 # libararies
 # ---------------------------------------------------------
-library(tibble)
-library(dplyr)
+#library(tibble)
+#library(dplyr)
 #library(readxl)
 #library(openxlsx)
 #library(DBI)
@@ -29,99 +29,94 @@ library(dplyr)
 
 
 
+# Info 1    [[]]  get value
+# ---------------------------------------------------------
+id_data <- list(age=56,
+                name=list(first_name="Peter",
+                          last_name="Pierrehumbert"))
+id_data
+
+id_age <- id_data[["age"]]
+# Now id_age contains just the value 56
+id_age
+
+id_name <- id_data[["name"]]
+# Now id_name contains a list equivalent to
+# list(first_name="Peter", last_name="Pierrehumbert"))
+id_name
+
+
+# Info 2    []  get 'key-value element' as a list
+# ---------------------------------------------------------
+id_data <- list(age=56,
+                name=list(first_name="Peter",
+                          last_name="Pierrehumbert"))
+
+
+id_age <- id_data["age"]
+# Now id_age contain a list equivalent to list(age=56)
+class(id_age)
+id_age
+
+
+id_name <- id_data["name"]
+# Now id_name contains a list equivalent to
+# list(name=list(first_name="Peter", last_name="Pierrehumbert")))
+class(id_name)
+id_name
+
+
+
+# Info 3
+# ---------------------------------------------------------
+a_long_list <- list(
+  weather=list(temperature=list(unit="Celcius",value=14.5),
+               humidity=list(unit="Percentage",value=67)),
+  venue=list(address=list(street="34, bvd Harve", city="Zurich"),
+             name="Convention Center"),
+  speaker=list(list(first_name="Vanessa", last_name="Hornag"),
+               list(first_name="Jill", last_name="Rro"),
+               list(first_name="Steve", last_name="Gniw")))
+
+View(a_long_list)
+
+
+
+
+
+
+
+
+
+
 # exercise 1
 # ---------------------------------------------------------
-my_first_function <- function() { "hello" }
 
-my_first_function()
+
 
 
 # exercise 2
 # ---------------------------------------------------------
-now_tomorrow <- function() {
-  lubridate::now() + lubridate::days(1)
-}
 
-now_tomorrow()
+
 
 
 # exercise 3
 # ---------------------------------------------------------
-now_in_d_days <- function(d) {
-  lubridate::now() + lubridate::days(d)
-}
 
-now_in_d_days()
 
 
 
 # exercise 4
 # ---------------------------------------------------------
-now_in_future <- function(d, y) {
-  lubridate::now() + lubridate::days(d) + lubridate::years(y)
-}
 
-now_in_future(3,5)
 
-now_in_future(y=5, d=3)
-now_in_future(y=3, d=5)
-now_in_future(d=3, 5)
-now_in_future(y=5,3)
-now_in_future(3, y=5)
 
 
 # exercise 5
 # ---------------------------------------------------------
-now_in_future_w_default <- function(d, y=10) {
-  lubridate::now() + lubridate::days(d) + lubridate::years(y)
-}
-
-now_in_future_w_default(3)
-now_in_future_w_default(3,5)
 
 
 
-# exercise 6
-# ---------------------------------------------------------
-now_in_future_w_default_2 <- function(d=2, y=12) {
-  lubridate::now() + lubridate::days(d) + lubridate::years(y)
-  1   #  error in code
-}
 
-now_in_future_w_default_2()
-
-
-
-# exercise 7
-# ---------------------------------------------------------
-now_in_future_w_default_3 <- function(d=2, y=12) {
-  print(lubridate::now() +
-          lubridate::days(d) +
-          lubridate::years(y))
-  1
-}
-
-d_day <- now_in_future_w_default_3()
-d_day
-
-
-
-# exercise 8
-# ---------------------------------------------------------
-important_date <- lubridate::ymd("2011-01-04")
-important_plus_days <- function(d=2) {
-  important_date + lubridate::days(d)
-}
-critical_date <- important_plus_days()
-critical_date
-
-
-# exercise 9
-# ---------------------------------------------------------
-important_date <- lubridate::ymd("2011-01-05")
-important_plus_days <- function(d=2) {
-  important_date <- lubridate::now()
-}
-important_plus_days() # Calling the function
-important_date # Calling the variable
 
