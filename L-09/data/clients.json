@@ -1,0 +1,21 @@
+{
+  "data": {
+    "clients": [
+      {
+        "first_name": "Helen",
+        "last_name": "Smith",
+        "gender": "female"
+      },
+      {
+        "first_name": "Joe",
+        "last_name": "Sota",
+        "gender": "male"
+      },
+      {
+        "first_name": "Sarah",
+        "last_name": "Ryon",
+        "gender": "female"
+      }
+    ]
+  }
+}
