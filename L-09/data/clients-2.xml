@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+  <clients>
+    <client>
+      <first_name>Helen</first_name>
+      <last_name>Smith</last_name>
+      <gender>female</gender>
+    </client>
+    <client>
+      <first_name>Joe</first_name>
+      <last_name>Sota</last_name>
+      <gender>male</gender>
+    </client>
+    <client>
+      <first_name>Sarah</first_name>
+      <last_name>Ryon</last_name>
+      <gender>female</gender>
+    </client>
+  </clients>
+</data>
