@@ -52,6 +52,7 @@ id_data <- list(age=56,
                 name=list(first_name="Peter",
                           last_name="Pierrehumbert"))
 
+id_data[["age"]]
 
 id_age <- id_data["age"]
 # Now id_age contain a list equivalent to list(age=56)
@@ -59,6 +60,7 @@ class(id_age)
 id_age
 
 
+id_data[["name"]]
 id_name <- id_data["name"]
 # Now id_name contains a list equivalent to
 # list(name=list(first_name="Peter", last_name="Pierrehumbert")))

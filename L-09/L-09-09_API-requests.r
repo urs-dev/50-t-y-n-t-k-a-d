@@ -1,7 +1,7 @@
 # ==========================================================================
 #  50 Things You Should Know About Data
 #
-#  Unit 09-06		list and JSON
+#  Unit 09-09		API requests
 # ==========================================================================
 
 # clean up
@@ -19,11 +19,9 @@ cat("\014")
 library(tibble)
 library(dplyr)
 #library(magrittr)
-#library(stringr)
-#library(janitor)
-#install.packages("jsonlite")
-library(jsonlite)
-#library(readr)
+library(stringr)
+library(janitor)
+library(readr)
 #library(readxl)
 #library(openxlsx)
 #library(DBI)
@@ -32,41 +30,6 @@ library(jsonlite)
 
 # load data
 # ---------------------------------------------------------
-### v1    import as JSON/LIST
-clients_data_json = read_json("L-09/data/clients.json")
-
-class(clients_data_json)   # list
-View(clients_data_json)
-
-
-### v2    import  as LIST/data.frame
-clients_data_json = read_json("L-09/data/clients.json", simplifyDataFrame=TRUE)
-
-class(clients_data_json)   # list
-View(clients_data_json)
-
-clients_data_json["data"]
-clients_data_json[["data"]]
-utils::View(clients_data_json)
-
-class(clients_data_json["data"])
-class(clients_data_json[["data"]][["clients"]])
-
-
-#   --> tibble
-tib = as_tibble(clients_data_json[["data"]][["clients"]])
-tib
-
-
-
-# save data as JSON
-# ---------------------------------------------------------
-write_json(clients_data_json, "L-09/data/clients_2.json")
-
-
-write_json(clients_data_json, "L-09/data/clients_3.json", auto_unbox=TRUE)
-
-
 
 
 
