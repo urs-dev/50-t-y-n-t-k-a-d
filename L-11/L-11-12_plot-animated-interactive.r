@@ -1,7 +1,8 @@
 # ==========================================================================
 #  50 Things You Should Know About Data
 #
-#  L-11-11   ggplot2 advanced:  best practices
+#  L-11-12   ggplot2 advanced:  animated
+#                               interactive
 # ==========================================================================
 
 # clean up
@@ -27,68 +28,35 @@ library(readxl)
 
 # load data
 # ---------------------------------------------------------
-sales_xls = read_excel("L-11/data/sales_data_sample.xlsx",
-                       sheet = "sales_data_sample", skip = 3) %>%
-  janitor::clean_names()  # clean up column names
-sales_xls
+mp <- tribble(
+  ~Month,~Area,~Price,
+  "2017-01", "EU",   "12",
+  "2017-01", "USA",  "17",
+  "2017-02", "EU",   "11",
+  "2017-02", "USA",  "13",
+  "2017-03", "EU",   "8",
+  "2017-03", "USA",  "11",
+  "2017-04", "EU",   "10",
+  "2017-04", "USA",  "15"
+)
 
-# example 1
+#   1     static plot
 # ---------------------------------------------------------
-#   default theme  = theme_gray
-sales_xls %>%
-  ggplot(aes(x=quantity_ordered, y=sales)) +
-  geom_point(mapping=aes(color=dealsize), alpha=0.3)
-
-#   theme_minimal
-sales_xls %>%
-  ggplot(aes(x=quantity_ordered, y=sales)) +
-  geom_point(mapping=aes(color=dealsize), alpha=0.3) +
-  theme_minimal()
-
-#   theme_bw
-sales_xls %>%
-  ggplot(aes(x=quantity_ordered, y=sales)) +
-  geom_point(mapping=aes(color=dealsize), alpha=0.3) +
-  theme_bw()
-
-#   theme_linedraw
-sales_xls %>%
-  ggplot(aes(x=quantity_ordered, y=sales)) +
-  geom_point(mapping=aes(color=dealsize), alpha=0.3) +
-  theme_linedraw()
-
-#   theme_light
-sales_xls %>%
-  ggplot(aes(x=quantity_ordered, y=sales)) +
-  geom_point(mapping=aes(color=dealsize), alpha=0.3) +
-  theme_light()
-
-#   theme_minimal
-sales_xls %>%
-  ggplot(aes(x=quantity_ordered, y=sales)) +
-  geom_point(mapping=aes(color=dealsize), alpha=0.3) +
-  theme_minimal()
-
-#   theme_dark
-sales_xls %>%
-  ggplot(aes(x=quantity_ordered, y=sales)) +
-  geom_point(mapping=aes(color=dealsize), alpha=0.3) +
-  theme_dark()
-
-#   theme_classic
-sales_xls %>%
-  ggplot(aes(x=quantity_ordered, y=sales)) +
-  geom_point(mapping=aes(color=dealsize), alpha=0.3) +
-  theme_classic()
-
-
-
-
-
-sales_xls %>%
-  ggplot(aes(x=quantity_ordered, y=sales)) +
-  geom_point(mapping=aes(color=dealsize), alpha=0.3) +
+plot <- mp %>%
+  mutate(Month=lubridate::parse_date_time(Month, orders="ym"),
+         Price=as.numeric(Price)) %>%
+  ggplot(mapping=aes(x=Month, y=Price)) +
+  geom_line(mapping=aes(color=Area), size=2) +
   theme_minimal() +
-  theme(axis.line = element_line(colour = "black", size= 4),
-        axis.ticks = element_line(size = 4, color = "red"),
-        plot.background = element_rect(fill="yellow"))
+  labs(title="Price per Area per Month",
+       subtitle="EU prices are lower than USA ones")
+
+plot
+
+
+#   2     animated plot
+#         default renderer: gifski_renderer()  --> install package gifski
+# ---------------------------------------------------------
+plot+
+  gganimate::transition_reveal(id=Area, along=Month)
+
